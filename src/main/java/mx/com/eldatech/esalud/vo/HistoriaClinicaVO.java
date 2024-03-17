@@ -5,15 +5,20 @@
 package mx.com.eldatech.esalud.vo;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -31,32 +36,21 @@ public class HistoriaClinicaVO implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_historia")
     private Integer idHistoria;
-    @Basic(optional = false)
-    @Column(name = "id_antecedentes")
-    private int idAntecedentes;
-    @Basic(optional = false)
-    @Column(name = "id_datos_identificacion")
-    private int idDatosIdentificacion;
-    @Basic(optional = false)
-    @Column(name = "id_interrogatorio")
-    private int idInterrogatorio;
-    @Basic(optional = false)
-    @Column(name = "clave_historia")
-    private String claveHistoria;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idHistoria")
+    private List<AntecedentesNoPatologicosVO> antecedentesNoPatologicosVOList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idHistoria")
+    private List<AntecedentesPatologicosVO> antecedentesPatologicosVOList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idHistoria")
+    private List<AntecedentesFamiliaresVO> antecedentesFamiliaresVOList;
+    @JoinColumn(name = "id_paciente", referencedColumnName = "id_paciente")
+    @ManyToOne(optional = false)
+    private PacienteVO idPaciente;
 
     public HistoriaClinicaVO() {
     }
 
     public HistoriaClinicaVO(Integer idHistoria) {
         this.idHistoria = idHistoria;
-    }
-
-    public HistoriaClinicaVO(Integer idHistoria, int idAntecedentes, int idDatosIdentificacion, int idInterrogatorio, String claveHistoria) {
-        this.idHistoria = idHistoria;
-        this.idAntecedentes = idAntecedentes;
-        this.idDatosIdentificacion = idDatosIdentificacion;
-        this.idInterrogatorio = idInterrogatorio;
-        this.claveHistoria = claveHistoria;
     }
 
     public Integer getIdHistoria() {
@@ -67,36 +61,36 @@ public class HistoriaClinicaVO implements Serializable {
         this.idHistoria = idHistoria;
     }
 
-    public int getIdAntecedentes() {
-        return idAntecedentes;
+    public List<AntecedentesNoPatologicosVO> getAntecedentesNoPatologicosVOList() {
+        return antecedentesNoPatologicosVOList;
     }
 
-    public void setIdAntecedentes(int idAntecedentes) {
-        this.idAntecedentes = idAntecedentes;
+    public void setAntecedentesNoPatologicosVOList(List<AntecedentesNoPatologicosVO> antecedentesNoPatologicosVOList) {
+        this.antecedentesNoPatologicosVOList = antecedentesNoPatologicosVOList;
     }
 
-    public int getIdDatosIdentificacion() {
-        return idDatosIdentificacion;
+    public List<AntecedentesPatologicosVO> getAntecedentesPatologicosVOList() {
+        return antecedentesPatologicosVOList;
     }
 
-    public void setIdDatosIdentificacion(int idDatosIdentificacion) {
-        this.idDatosIdentificacion = idDatosIdentificacion;
+    public void setAntecedentesPatologicosVOList(List<AntecedentesPatologicosVO> antecedentesPatologicosVOList) {
+        this.antecedentesPatologicosVOList = antecedentesPatologicosVOList;
     }
 
-    public int getIdInterrogatorio() {
-        return idInterrogatorio;
+    public List<AntecedentesFamiliaresVO> getAntecedentesFamiliaresVOList() {
+        return antecedentesFamiliaresVOList;
     }
 
-    public void setIdInterrogatorio(int idInterrogatorio) {
-        this.idInterrogatorio = idInterrogatorio;
+    public void setAntecedentesFamiliaresVOList(List<AntecedentesFamiliaresVO> antecedentesFamiliaresVOList) {
+        this.antecedentesFamiliaresVOList = antecedentesFamiliaresVOList;
     }
 
-    public String getClaveHistoria() {
-        return claveHistoria;
+    public PacienteVO getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setClaveHistoria(String claveHistoria) {
-        this.claveHistoria = claveHistoria;
+    public void setIdPaciente(PacienteVO idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
     @Override

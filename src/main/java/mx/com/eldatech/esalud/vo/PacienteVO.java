@@ -5,6 +5,7 @@
 package mx.com.eldatech.esalud.vo;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -22,6 +24,7 @@ import jakarta.persistence.Transient;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -32,6 +35,8 @@ import java.util.Date;
 @NamedQueries({
     @NamedQuery(name = "PacienteVO.findAll", query = "SELECT p FROM PacienteVO p")})
 public class PacienteVO implements Serializable {
+
+    
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -81,6 +86,8 @@ public class PacienteVO implements Serializable {
     @JoinColumn(name = "id_medico", referencedColumnName = "id_medico")
     @ManyToOne(optional = false)
     private MedicosVO idMedico;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPaciente")
+    private List<HistoriaClinicaVO> historiaClinicaVOList;
     
     @Transient
     private String fechaRegistroFor;
@@ -271,6 +278,14 @@ public class PacienteVO implements Serializable {
     public void setFechaRegistroFor() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         fechaRegistroFor = formatter.format(this.fechaRegistro);
+    }
+
+    public List<HistoriaClinicaVO> getHistoriaClinicaVOList() {
+        return historiaClinicaVOList;
+    }
+
+    public void setHistoriaClinicaVOList(List<HistoriaClinicaVO> historiaClinicaVOList) {
+        this.historiaClinicaVOList = historiaClinicaVOList;
     }
     
 }
