@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="mx.com.eldatech_esalud_jar_1.0PU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>mx.com.eldatech.esalud.vo.MedicamentosRecetadosVO</class>
+    <class>mx.com.eldatech.esalud.vo.Pacientes</class>
+    <class>mx.com.eldatech.esalud.dao.DatosIdentificacion</class>
+    <class>mx.com.eldatech.esalud.dao.AntecedentesMedicos</class>
+    <class>mx.com.eldatech.esalud.dao.InterrogatorioSistemas</class>
+    <class>mx.com.eldatech.esalud.vo.AntecedentesMedicosVO</class>
+    <class>mx.com.eldatech.esalud.vo.EstudiosLaboratorioVO</class>
+    <class>mx.com.eldatech.esalud.vo.PadecimientoActualVO</class>
+    <class>mx.com.eldatech.esalud.vo.DatosIdentificacionVO</class>
+    <class>mx.com.eldatech.esalud.vo.InterrogatorioSistemasVO</class>
+    <class>mx.com.eldatech.esalud.vo.TratamientoVO</class>
+    <class>mx.com.eldatech.esalud.vo.DiagnosticoVO</class>
+    <class>mx.com.eldatech.esalud.vo.ExploracionFisicaVO</class>
+    <class>mx.com.eldatech.esalud.vo.HistoriaClinicaVO</class>
+    <class>mx.com.eldatech.esalud.vo.ConsultasVO</class>
+    <class>mx.com.eldatech.esalud.vo.PacientesVO</class>
+    <class>mx.com.eldatech.esalud.vo.PerfilesVO</class>
+    <class>mx.com.eldatech.esalud.vo.UsuariosVO</class>
+    <class>mx.com.eldatech.esalud.vo.CatCie10VO</class>
+    <class>mx.com.eldatech.esalud.vo.MedicosVO</class>
+    <class>mx.com.eldatech.esalud.vo.MedicamentosVO</class>
+    <class>mx.com.eldatech.esalud.vo.RecetasVO</class>
+    <class>mx.com.eldatech.esalud.vo.MedicosVO_1</class>
+    <class>mx.com.eldatech.esalud.vo.PacienteVO_1</class>
+    <class>mx.com.eldatech.esalud.vo.PacienteVO</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://3.23.131.149:5432/E-SALUD"/>
+      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="Dd0m1ngu3z1!"/>
+    </properties>
+  </persistence-unit>
+</persistence>
