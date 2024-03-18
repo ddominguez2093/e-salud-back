@@ -63,6 +63,24 @@ public class AntecedentesPatologicosVO implements Serializable {
     @JoinColumn(name = "id_historia", referencedColumnName = "id_historia")
     @ManyToOne(optional = false)
     private HistoriaClinicaVO idHistoria;
+    @Column(name = "obsHospitalizaciones")
+    private String obsHospitalizaciones;
+    @Column(name = "obsCirugias")
+    private String obsCirugias;
+    @Column(name = "obsDiabetes")
+    private String obsDiabetes;
+    @Column(name = "obsHipertension")
+    private String obsHipertension;
+    @Column(name = "obsEnfCorazon")
+    private String obsEnfCorazon;
+    @Column(name = "obsCancer")
+    private String obsCancer;
+    @Column(name = "obsTuberculosis")
+    private String obsTuberculosis;
+    @Column(name = "obsEts")
+    private String obsEts;
+    @Column(name = "obsPatResp")
+    private String obsPatResp;
 
     public AntecedentesPatologicosVO() {
     }
@@ -195,6 +213,78 @@ public class AntecedentesPatologicosVO implements Serializable {
     @Override
     public String toString() {
         return "mx.com.eldatech.esalud.vo.AntecedentesPatologicosVO[ idAntecedente=" + idAntecedente + " ]";
+    }
+
+    public String getObsHospitalizaciones() {
+        return obsHospitalizaciones;
+    }
+
+    public void setObsHospitalizaciones(String obsHospitalizaciones) {
+        this.obsHospitalizaciones = obsHospitalizaciones;
+    }
+
+    public String getObsCirugias() {
+        return obsCirugias;
+    }
+
+    public void setObsCirugias(String obsCirugias) {
+        this.obsCirugias = obsCirugias;
+    }
+
+    public String getObsDiabetes() {
+        return obsDiabetes;
+    }
+
+    public void setObsDiabetes(String obsDiabetes) {
+        this.obsDiabetes = obsDiabetes;
+    }
+
+    public String getObsHipertension() {
+        return obsHipertension;
+    }
+
+    public void setObsHipertension(String obsHipertension) {
+        this.obsHipertension = obsHipertension;
+    }
+
+    public String getObsEnfCorazon() {
+        return obsEnfCorazon;
+    }
+
+    public void setObsEnfCorazon(String obsEnfCorazon) {
+        this.obsEnfCorazon = obsEnfCorazon;
+    }
+
+    public String getObsCancer() {
+        return obsCancer;
+    }
+
+    public void setObsCancer(String obsCancer) {
+        this.obsCancer = obsCancer;
+    }
+
+    public String getObsTuberculosis() {
+        return obsTuberculosis;
+    }
+
+    public void setObsTuberculosis(String obsTuberculosis) {
+        this.obsTuberculosis = obsTuberculosis;
+    }
+
+    public String getObsEts() {
+        return obsEts;
+    }
+
+    public void setObsEts(String obsEts) {
+        this.obsEts = obsEts;
+    }
+
+    public String getObsPatResp() {
+        return obsPatResp;
+    }
+
+    public void setObsPatResp(String obsPatResp) {
+        this.obsPatResp = obsPatResp;
     }
     
 }
