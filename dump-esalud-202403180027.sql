@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: esalud
 -- ------------------------------------------------------
--- Server version	8.3.0
+-- Server version	8.2.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,14 +31,14 @@ CREATE TABLE `antecedentes_familiares` (
   `cancer` tinyint(1) NOT NULL DEFAULT '0',
   `otros` tinyint(1) NOT NULL DEFAULT '0',
   `observaciones_diabetes` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `observaciones_corazon` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `observaciones_hipertencion` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `observaciones_cancer` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `observaciones_otros` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `observaciones_corazon` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `observaciones_hipertencion` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `observaciones_cancer` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `observaciones_otros` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id_antecedentes`),
   KEY `antecedentes_familiares_historia_clinica_FK` (`id_historia`),
   CONSTRAINT `antecedentes_familiares_historia_clinica_FK` FOREIGN KEY (`id_historia`) REFERENCES `historia_clinica` (`id_historia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,6 +47,7 @@ CREATE TABLE `antecedentes_familiares` (
 
 LOCK TABLES `antecedentes_familiares` WRITE;
 /*!40000 ALTER TABLE `antecedentes_familiares` DISABLE KEYS */;
+INSERT INTO `antecedentes_familiares` VALUES (2,3,1,0,0,1,0,'Padre, Abuelos Paternos','','','Bisabuela Paterna','');
 /*!40000 ALTER TABLE `antecedentes_familiares` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,6 +101,15 @@ CREATE TABLE `antecedentes_patologicos` (
   `tuberculosis` tinyint(1) NOT NULL DEFAULT '0',
   `ets` tinyint(1) NOT NULL DEFAULT '0',
   `patologias_resp` tinyint(1) NOT NULL DEFAULT '0',
+  `obsHospitalizaciones` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obsCirugias` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obsDiabetes` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obsHipertension` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obsEnfCorazon` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obsCancer` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obsTuberculosis` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obsEts` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obsPatResp` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id_antecedente`),
   KEY `antecedentes_patologicos_historia_clinica_FK` (`id_historia`),
   CONSTRAINT `antecedentes_patologicos_historia_clinica_FK` FOREIGN KEY (`id_historia`) REFERENCES `historia_clinica` (`id_historia`)
@@ -508,4 +518,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-17 20:40:20
+-- Dump completed on 2024-03-18  0:27:56
