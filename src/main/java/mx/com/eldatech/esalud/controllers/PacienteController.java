@@ -9,15 +9,27 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import mx.com.eldatech.esalud.dao.AntecedentesFamiliaresService;
+import mx.com.eldatech.esalud.dao.AntecedentesNoPatologicosService;
+import mx.com.eldatech.esalud.dao.AntecedentesPatologicosService;
 import mx.com.eldatech.esalud.dao.ConsultasService;
+import mx.com.eldatech.esalud.dao.EstudiosGabineteService;
 import mx.com.eldatech.esalud.dao.HistoriaClinicaService;
+import mx.com.eldatech.esalud.dao.InterrogatorioSistemasService;
 import mx.com.eldatech.esalud.dao.PacienteService;
 import mx.com.eldatech.esalud.dto.AntecedentesFamiliaresDTO;
+import mx.com.eldatech.esalud.dto.AntecedentesNoPatologicosDTO;
+import mx.com.eldatech.esalud.dto.AntecedentesPatologicosDTO;
+import mx.com.eldatech.esalud.dto.EstudiosGabineteDTO;
 import mx.com.eldatech.esalud.dto.HistoriaClinicaDTO;
+import mx.com.eldatech.esalud.dto.InterrogatorioSistemasDTO;
 import mx.com.eldatech.esalud.dto.PacienteDTO;
 import mx.com.eldatech.esalud.vo.AntecedentesFamiliaresVO;
+import mx.com.eldatech.esalud.vo.AntecedentesNoPatologicosVO;
+import mx.com.eldatech.esalud.vo.AntecedentesPatologicosVO;
 import mx.com.eldatech.esalud.vo.ConsultasVO;
+import mx.com.eldatech.esalud.vo.EstudiosGabineteVO;
 import mx.com.eldatech.esalud.vo.HistoriaClinicaVO;
+import mx.com.eldatech.esalud.vo.InterrogatorioSistemasVO;
 import mx.com.eldatech.esalud.vo.PacienteVO;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
@@ -57,6 +69,18 @@ public class PacienteController {
     
     @Autowired
     private AntecedentesFamiliaresService antecedentesService;
+    
+    @Autowired
+    private AntecedentesPatologicosService antecedentesPatService;
+    
+    @Autowired
+    private AntecedentesNoPatologicosService antecedentesNoPatService;
+    
+    @Autowired
+    private InterrogatorioSistemasService antecedentesSistemasService;
+    
+    @Autowired
+    private EstudiosGabineteService estudiosGabineteService;
     
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Error message")
@@ -133,6 +157,46 @@ public class PacienteController {
         AntecedentesFamiliaresDTO antecedentesDTO = this.antecedentesService.insertAntecedentes(antecedentes);
         if(antecedentesDTO != null) {
             return new ResponseEntity<>(antecedentesDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @PostMapping("/insertAntecedentesPatologicos")
+    public ResponseEntity<AntecedentesPatologicosDTO> insertAntecedentesPatologicos(@RequestBody AntecedentesPatologicosVO antecedentes) {
+        AntecedentesPatologicosDTO antecedentesDTO = this.antecedentesPatService.insertAntecedentes(antecedentes);
+        if(antecedentesDTO != null) {
+            return new ResponseEntity<>(antecedentesDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @PostMapping("/insertAntecedentesNoPatologicos")
+    public ResponseEntity<AntecedentesNoPatologicosDTO> insertAntecedentesPatologicos(@RequestBody AntecedentesNoPatologicosVO antecedentes) {
+        AntecedentesNoPatologicosDTO antecedentesDTO = this.antecedentesNoPatService.insertAntecedentes(antecedentes);
+        if(antecedentesDTO != null) {
+            return new ResponseEntity<>(antecedentesDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @PostMapping("/insertInterrogatorio")
+    public ResponseEntity<InterrogatorioSistemasDTO> insertInterrogatorio(@RequestBody InterrogatorioSistemasVO interrogatorio) {
+        InterrogatorioSistemasDTO antecedentesDTO = this.antecedentesSistemasService.insertInterrogatorio(interrogatorio);
+        if(antecedentesDTO != null) {
+            return new ResponseEntity<>(antecedentesDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @PostMapping("/insertEstudios")
+    public ResponseEntity<EstudiosGabineteDTO> insertInterrogatorio(@RequestBody EstudiosGabineteVO estudios) {
+        EstudiosGabineteDTO estudiosDTO = this.estudiosGabineteService.insertEstudiosGabinete(estudios);
+        if(estudiosDTO != null) {
+            return new ResponseEntity<>(estudiosDTO, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

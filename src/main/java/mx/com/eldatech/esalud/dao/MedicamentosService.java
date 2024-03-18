@@ -39,7 +39,8 @@ public class MedicamentosService {
     public MedicamentosVO updateMedicamento(MedicamentosVO medicamento) {
         MedicamentosVO medUpdate = repository.findById(medicamento.getId().longValue()).orElse(null);
         if (medUpdate != null) {
-            medUpdate.setNombre(medicamento.getNombre());
+            medUpdate.setPresentacion(medicamento.getPresentacion());
+            medUpdate.setFormaFarmaceutica(medicamento.getFormaFarmaceutica());
             medUpdate.setSustancia(medicamento.getSustancia());
         }
         return repository.save(medUpdate);

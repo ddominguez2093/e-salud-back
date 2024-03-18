@@ -68,27 +68,61 @@ public class PacienteDTO {
     }
 
     private String getAgeFromBirthDate(String fechaNacimiento) {
+        LocalDate fechaNacimientoLocal = parseToLocalDate(fechaNacimiento);
+        LocalDate fechaActual = LocalDate.now();
+        Period periodo = calculatePeriod(fechaNacimientoLocal, fechaActual);
+
+        if (isUnderOneYear(periodo)) {
+            return formatAgeUnderOneYear(periodo);
+        } else {
+            return formatAgeOverOneYear(periodo);
+        }
+    }
+
+    private LocalDate parseToLocalDate(String fechaNacimiento) {
         String[] partesFecha = fechaNacimiento.split("/");
         int dia = Integer.parseInt(partesFecha[0]);
         int mes = Integer.parseInt(partesFecha[1]);
         int año = Integer.parseInt(partesFecha[2]);
+        return LocalDate.of(año, mes, dia);
+    }
 
-        // Crear un objeto LocalDate a partir de la fecha de nacimiento
-        LocalDate fechaNacimientoLocal = LocalDate.of(año, mes, dia);
+    private Period calculatePeriod(LocalDate fechaNacimiento, LocalDate fechaActual) {
+        return Period.between(fechaNacimiento, fechaActual);
+    }
 
-        // Calcular la edad en años y meses
-        LocalDate fechaActual = LocalDate.now();
-        Period periodo = Period.between(fechaNacimientoLocal, fechaActual);
-        int años = periodo.getYears();
+    private boolean isUnderOneYear(Period periodo) {
+        return periodo.getYears() < 1;
+    }
+
+    private String formatAgeUnderOneYear(Period periodo) {
         int meses = periodo.getMonths();
+        int días = periodo.getDays();
 
-        // Concatenar la edad con "Años" o "Meses"
         String edadConcatenada = "";
-        if (años > 0) {
-            edadConcatenada += años + " Años ";
-        }
         if (meses > 0) {
-            edadConcatenada += meses + " Meses";
+            edadConcatenada += meses + " Mes";
+            if (meses > 1) {
+                edadConcatenada += "es";
+            }
+            if (días > 0) {
+                edadConcatenada += " y ";
+            }
+        }
+        if (días > 0) {
+            edadConcatenada += días + " Día";
+            if (días > 1) {
+                edadConcatenada += "s";
+            }
+        }
+        return edadConcatenada;
+    }
+
+    private String formatAgeOverOneYear(Period periodo) {
+        int años = periodo.getYears();
+        String edadConcatenada = años + " Año";
+        if (años > 1) {
+            edadConcatenada += "s";
         }
         return edadConcatenada;
     }

@@ -27,6 +27,8 @@ import java.io.Serializable;
     @NamedQuery(name = "AntecedentesNoPatologicosVO.findAll", query = "SELECT a FROM AntecedentesNoPatologicosVO a")})
 public class AntecedentesNoPatologicosVO implements Serializable {
 
+    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,8 +50,16 @@ public class AntecedentesNoPatologicosVO implements Serializable {
     @Basic(optional = false)
     @Column(name = "otros")
     private boolean otros;
-    @Column(name = "observaciones")
-    private String observaciones;
+    @Column(name = "observaciones_actividad_fisica")
+    private String observacionesActividadFisica;
+    @Column(name = "observaciones_tabaquismo")
+    private String observacionesTabaquismo;
+    @Column(name = "observaciones_alcoholismo")
+    private String observacionesAlcoholismo;
+    @Column(name = "observaciones_dependencia")
+    private String observacionesDependencia;
+    @Column(name = "observaciones_otros")
+    private String observacionesOtros;
     @JoinColumn(name = "id_historia", referencedColumnName = "id_historia")
     @ManyToOne(optional = false)
     private HistoriaClinicaVO idHistoria;
@@ -118,14 +128,6 @@ public class AntecedentesNoPatologicosVO implements Serializable {
         this.otros = otros;
     }
 
-    public String getObservaciones() {
-        return observaciones;
-    }
-
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }
-
     public HistoriaClinicaVO getIdHistoria() {
         return idHistoria;
     }
@@ -157,6 +159,46 @@ public class AntecedentesNoPatologicosVO implements Serializable {
     @Override
     public String toString() {
         return "mx.com.eldatech.esalud.vo.AntecedentesNoPatologicosVO[ idAntecedente=" + idAntecedente + " ]";
+    }
+
+    public String getObservacionesActividadFisica() {
+        return observacionesActividadFisica;
+    }
+
+    public void setObservacionesActividadFisica(String observacionesActividadFisica) {
+        this.observacionesActividadFisica = observacionesActividadFisica;
+    }
+
+    public String getObservacionesTabaquismo() {
+        return observacionesTabaquismo;
+    }
+
+    public void setObservacionesTabaquismo(String observacionesTabaquismo) {
+        this.observacionesTabaquismo = observacionesTabaquismo;
+    }
+
+    public String getObservacionesAlcoholismo() {
+        return observacionesAlcoholismo;
+    }
+
+    public void setObservacionesAlcoholismo(String observacionesAlcoholismo) {
+        this.observacionesAlcoholismo = observacionesAlcoholismo;
+    }
+
+    public String getObservacionesDependencia() {
+        return observacionesDependencia;
+    }
+
+    public void setObservacionesDependencia(String observacionesDependencia) {
+        this.observacionesDependencia = observacionesDependencia;
+    }
+
+    public String getObservacionesOtros() {
+        return observacionesOtros;
+    }
+
+    public void setObservacionesOtros(String observacionesOtros) {
+        this.observacionesOtros = observacionesOtros;
     }
     
 }

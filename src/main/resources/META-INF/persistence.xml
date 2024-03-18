@@ -28,8 +28,9 @@
     <class>mx.com.eldatech.esalud.vo.PacienteVO</class>
     <class>mx.com.eldatech.esalud.vo.AntecedentesFamiliaresVO</class>
     <class>mx.com.eldatech.esalud.vo.AntecedentesNoPatologicosVO</class>
-    <class>mx.com.eldatech.esalud.vo.AntecedentesPatologicosVO</class>
     <class>mx.com.eldatech.esalud.vo.HistoriaClinicaVO</class>
+    <class>mx.com.eldatech.esalud.vo.AntecedentesPatologicosVO</class>
+    <class>mx.com.eldatech.esalud.vo.EstudiosGabineteVO</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://3.23.131.149:5432/E-SALUD"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

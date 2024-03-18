@@ -30,6 +30,10 @@ import java.util.List;
     @NamedQuery(name = "HistoriaClinicaVO.findAll", query = "SELECT h FROM HistoriaClinicaVO h")})
 public class HistoriaClinicaVO implements Serializable {
 
+    
+
+    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,6 +49,10 @@ public class HistoriaClinicaVO implements Serializable {
     @JoinColumn(name = "id_paciente", referencedColumnName = "id_paciente")
     @ManyToOne(optional = false)
     private PacienteVO idPaciente;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idHistoria")
+    private List<InterrogatorioSistemasVO> interrogatorioSistemasVOList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idHistoria")
+    private List<EstudiosGabineteVO> estudiosGabineteVOList;
 
     public HistoriaClinicaVO() {
     }
@@ -116,6 +124,22 @@ public class HistoriaClinicaVO implements Serializable {
     @Override
     public String toString() {
         return "mx.com.eldatech.esalud.vo.HistoriaClinicaVO[ idHistoria=" + idHistoria + " ]";
+    }
+
+    public List<InterrogatorioSistemasVO> getInterrogatorioSistemasVOList() {
+        return interrogatorioSistemasVOList;
+    }
+
+    public void setInterrogatorioSistemasVOList(List<InterrogatorioSistemasVO> interrogatorioSistemasVOList) {
+        this.interrogatorioSistemasVOList = interrogatorioSistemasVOList;
+    }
+
+    public List<EstudiosGabineteVO> getEstudiosGabineteVOList() {
+        return estudiosGabineteVOList;
+    }
+
+    public void setEstudiosGabineteVOList(List<EstudiosGabineteVO> estudiosGabineteVOList) {
+        this.estudiosGabineteVOList = estudiosGabineteVOList;
     }
     
 }

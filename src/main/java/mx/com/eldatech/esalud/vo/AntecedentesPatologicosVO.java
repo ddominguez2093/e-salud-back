@@ -60,27 +60,27 @@ public class AntecedentesPatologicosVO implements Serializable {
     @Basic(optional = false)
     @Column(name = "patologias_resp")
     private boolean patologiasResp;
+    @Column(name = "obs_hospitalizaciones")
+    private String obsHospitalizaciones;
+    @Column(name = "obs_cirugias")
+    private String obsCirugias;
+    @Column(name = "obs_diabetes")
+    private String obsDiabetes;
+    @Column(name = "obs_hipertension")
+    private String obsHipertension;
+    @Column(name = "obs_enf_corazon")
+    private String obsEnfCorazon;
+    @Column(name = "obs_cancer")
+    private String obsCancer;
+    @Column(name = "obs_tuberculosis")
+    private String obsTuberculosis;
+    @Column(name = "obs_ets")
+    private String obsEts;
+    @Column(name = "obs_pat_resp")
+    private String obsPatResp;
     @JoinColumn(name = "id_historia", referencedColumnName = "id_historia")
     @ManyToOne(optional = false)
     private HistoriaClinicaVO idHistoria;
-    @Column(name = "obsHospitalizaciones")
-    private String obsHospitalizaciones;
-    @Column(name = "obsCirugias")
-    private String obsCirugias;
-    @Column(name = "obsDiabetes")
-    private String obsDiabetes;
-    @Column(name = "obsHipertension")
-    private String obsHipertension;
-    @Column(name = "obsEnfCorazon")
-    private String obsEnfCorazon;
-    @Column(name = "obsCancer")
-    private String obsCancer;
-    @Column(name = "obsTuberculosis")
-    private String obsTuberculosis;
-    @Column(name = "obsEts")
-    private String obsEts;
-    @Column(name = "obsPatResp")
-    private String obsPatResp;
 
     public AntecedentesPatologicosVO() {
     }
@@ -182,39 +182,6 @@ public class AntecedentesPatologicosVO implements Serializable {
         this.patologiasResp = patologiasResp;
     }
 
-    public HistoriaClinicaVO getIdHistoria() {
-        return idHistoria;
-    }
-
-    public void setIdHistoria(HistoriaClinicaVO idHistoria) {
-        this.idHistoria = idHistoria;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idAntecedente != null ? idAntecedente.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof AntecedentesPatologicosVO)) {
-            return false;
-        }
-        AntecedentesPatologicosVO other = (AntecedentesPatologicosVO) object;
-        if ((this.idAntecedente == null && other.idAntecedente != null) || (this.idAntecedente != null && !this.idAntecedente.equals(other.idAntecedente))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "mx.com.eldatech.esalud.vo.AntecedentesPatologicosVO[ idAntecedente=" + idAntecedente + " ]";
-    }
-
     public String getObsHospitalizaciones() {
         return obsHospitalizaciones;
     }
@@ -285,6 +252,39 @@ public class AntecedentesPatologicosVO implements Serializable {
 
     public void setObsPatResp(String obsPatResp) {
         this.obsPatResp = obsPatResp;
+    }
+
+    public HistoriaClinicaVO getIdHistoria() {
+        return idHistoria;
+    }
+
+    public void setIdHistoria(HistoriaClinicaVO idHistoria) {
+        this.idHistoria = idHistoria;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idAntecedente != null ? idAntecedente.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof AntecedentesPatologicosVO)) {
+            return false;
+        }
+        AntecedentesPatologicosVO other = (AntecedentesPatologicosVO) object;
+        if ((this.idAntecedente == null && other.idAntecedente != null) || (this.idAntecedente != null && !this.idAntecedente.equals(other.idAntecedente))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "mx.com.eldatech.esalud.vo.AntecedentesPatologicosVO[ idAntecedente=" + idAntecedente + " ]";
     }
     
 }

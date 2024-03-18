@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
@@ -32,14 +33,16 @@ public class MedicamentosVO implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "nombre")
-    private String nombre;
-    @Basic(optional = false)
+    @Lob
     @Column(name = "sustancia")
     private String sustancia;
     @Basic(optional = false)
-    @Column(name = "dosificacion")
-    private String dosificacion;
+    @Lob
+    @Column(name = "forma_farmaceutica")
+    private String formaFarmaceutica;
+    @Basic(optional = false)
+    @Column(name = "presentacion")
+    private String presentacion;
 
     public MedicamentosVO() {
     }
@@ -48,11 +51,11 @@ public class MedicamentosVO implements Serializable {
         this.id = id;
     }
 
-    public MedicamentosVO(Integer id, String nombre, String sustancia, String dosificacion) {
+    public MedicamentosVO(Integer id, String sustancia, String formaFarmaceutica, String presentacion) {
         this.id = id;
-        this.nombre = nombre;
         this.sustancia = sustancia;
-        this.dosificacion = dosificacion;
+        this.formaFarmaceutica = formaFarmaceutica;
+        this.presentacion = presentacion;
     }
 
     public Integer getId() {
@@ -63,14 +66,6 @@ public class MedicamentosVO implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public String getSustancia() {
         return sustancia;
     }
@@ -79,12 +74,20 @@ public class MedicamentosVO implements Serializable {
         this.sustancia = sustancia;
     }
 
-    public String getDosificacion() {
-        return dosificacion;
+    public String getFormaFarmaceutica() {
+        return formaFarmaceutica;
     }
 
-    public void setDosificacion(String dosificacion) {
-        this.dosificacion = dosificacion;
+    public void setFormaFarmaceutica(String formaFarmaceutica) {
+        this.formaFarmaceutica = formaFarmaceutica;
+    }
+
+    public String getPresentacion() {
+        return presentacion;
+    }
+
+    public void setPresentacion(String presentacion) {
+        this.presentacion = presentacion;
     }
 
     @Override

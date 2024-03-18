@@ -4,6 +4,8 @@
  */
 package mx.com.eldatech.esalud.dao;
 
+import mx.com.eldatech.esalud.dto.AntecedentesPatologicosDTO;
+import mx.com.eldatech.esalud.vo.AntecedentesPatologicosVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,11 @@ public class AntecedentesPatologicosService {
     private final AntecedentesPatologicosRepo repository;
     
     @Autowired
-    public AntecedentesPatologicosService() {
-        
+    public AntecedentesPatologicosService(AntecedentesPatologicosRepo repository) {
+        this.repository = repository;
+    }
+    
+    public AntecedentesPatologicosDTO insertAntecedentes(AntecedentesPatologicosVO antecedentesVO) {
+        return new AntecedentesPatologicosDTO(this.repository.save(antecedentesVO));
     }
 }

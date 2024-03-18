@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: esalud
 -- ------------------------------------------------------
--- Server version	8.2.0
+-- Server version	8.3.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -66,11 +66,15 @@ CREATE TABLE `antecedentes_no_patologicos` (
   `alcoholismo` tinyint(1) NOT NULL DEFAULT '0',
   `dependencia_sustancias` tinyint(1) NOT NULL DEFAULT '0',
   `otros` tinyint(1) NOT NULL DEFAULT '0',
-  `observaciones` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `observaciones_actividad_fisica` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `observaciones_tabaquismo` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `observaciones_alcoholismo` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `observaciones_dependencia` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `observaciones_otros` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id_antecedente`),
   KEY `antecedentes_no_patologicos_historia_clinica_FK` (`id_historia`),
   CONSTRAINT `antecedentes_no_patologicos_historia_clinica_FK` FOREIGN KEY (`id_historia`) REFERENCES `historia_clinica` (`id_historia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,6 +83,7 @@ CREATE TABLE `antecedentes_no_patologicos` (
 
 LOCK TABLES `antecedentes_no_patologicos` WRITE;
 /*!40000 ALTER TABLE `antecedentes_no_patologicos` DISABLE KEYS */;
+INSERT INTO `antecedentes_no_patologicos` VALUES (1,3,0,1,1,1,0,'','Eventos Sociales','Eventos Sociales','Marihuana','');
 /*!40000 ALTER TABLE `antecedentes_no_patologicos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,19 +106,19 @@ CREATE TABLE `antecedentes_patologicos` (
   `tuberculosis` tinyint(1) NOT NULL DEFAULT '0',
   `ets` tinyint(1) NOT NULL DEFAULT '0',
   `patologias_resp` tinyint(1) NOT NULL DEFAULT '0',
-  `obsHospitalizaciones` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `obsCirugias` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `obsDiabetes` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `obsHipertension` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `obsEnfCorazon` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `obsCancer` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `obsTuberculosis` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `obsEts` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `obsPatResp` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obs_hospitalizaciones` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obs_cirugias` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obs_diabetes` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obs_hipertension` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obs_enf_corazon` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obs_cancer` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obs_tuberculosis` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obs_ets` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `obs_pat_resp` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id_antecedente`),
   KEY `antecedentes_patologicos_historia_clinica_FK` (`id_historia`),
   CONSTRAINT `antecedentes_patologicos_historia_clinica_FK` FOREIGN KEY (`id_historia`) REFERENCES `historia_clinica` (`id_historia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,6 +127,7 @@ CREATE TABLE `antecedentes_patologicos` (
 
 LOCK TABLES `antecedentes_patologicos` WRITE;
 /*!40000 ALTER TABLE `antecedentes_patologicos` DISABLE KEYS */;
+INSERT INTO `antecedentes_patologicos` VALUES (1,3,1,1,0,0,0,0,0,0,0,'Apendicitis','apendicitis','','','','','','','');
 /*!40000 ALTER TABLE `antecedentes_patologicos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,6 +222,33 @@ LOCK TABLES `diagnostico` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `estudios_gabinete`
+--
+
+DROP TABLE IF EXISTS `estudios_gabinete`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `estudios_gabinete` (
+  `id_estudio` int NOT NULL AUTO_INCREMENT,
+  `id_historia` int NOT NULL,
+  `estudios` varchar(600) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id_estudio`),
+  KEY `estudios_gabinete_historia_clinica_FK` (`id_historia`),
+  CONSTRAINT `estudios_gabinete_historia_clinica_FK` FOREIGN KEY (`id_historia`) REFERENCES `historia_clinica` (`id_historia`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `estudios_gabinete`
+--
+
+LOCK TABLES `estudios_gabinete` WRITE;
+/*!40000 ALTER TABLE `estudios_gabinete` DISABLE KEYS */;
+INSERT INTO `estudios_gabinete` VALUES (1,3,'Rayos x torax');
+/*!40000 ALTER TABLE `estudios_gabinete` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `estudios_laboratorio`
 --
 
@@ -253,7 +286,7 @@ CREATE TABLE `historia_clinica` (
   PRIMARY KEY (`id_historia` DESC),
   KEY `historia_clinica_paciente_FK` (`id_paciente`),
   CONSTRAINT `historia_clinica_paciente_FK` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -262,8 +295,44 @@ CREATE TABLE `historia_clinica` (
 
 LOCK TABLES `historia_clinica` WRITE;
 /*!40000 ALTER TABLE `historia_clinica` DISABLE KEYS */;
-INSERT INTO `historia_clinica` VALUES (4,7),(1,10),(2,11),(3,12);
+INSERT INTO `historia_clinica` VALUES (4,7),(1,10),(2,11),(3,12),(5,13),(6,14);
 /*!40000 ALTER TABLE `historia_clinica` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `interrogatorio_sistemas`
+--
+
+DROP TABLE IF EXISTS `interrogatorio_sistemas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `interrogatorio_sistemas` (
+  `id_interrogatorio` int NOT NULL AUTO_INCREMENT,
+  `id_historia` int NOT NULL,
+  `aparato_resp` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `aparato_dig` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `aparato_cardio` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `aparato_renal` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `aparato_genital` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `sistema_endocrino` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `sistema_hemato_linfatico` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `piel_anexos` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `musculo_esqueletico` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `sistema_nervioso` varchar(500) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id_interrogatorio`),
+  KEY `interrogatorio_sistemas_historia_clinica_FK` (`id_historia`),
+  CONSTRAINT `interrogatorio_sistemas_historia_clinica_FK` FOREIGN KEY (`id_historia`) REFERENCES `historia_clinica` (`id_historia`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `interrogatorio_sistemas`
+--
+
+LOCK TABLES `interrogatorio_sistemas` WRITE;
+/*!40000 ALTER TABLE `interrogatorio_sistemas` DISABLE KEYS */;
+INSERT INTO `interrogatorio_sistemas` VALUES (1,3,'tos del fumador','dolor de estomago','','','','','','','','');
+/*!40000 ALTER TABLE `interrogatorio_sistemas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -350,7 +419,7 @@ CREATE TABLE `paciente` (
   PRIMARY KEY (`id_paciente`),
   KEY `paciente_medicos_FK` (`id_medico`),
   CONSTRAINT `paciente_medicos_FK` FOREIGN KEY (`id_medico`) REFERENCES `medicos` (`id_medico`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -359,7 +428,7 @@ CREATE TABLE `paciente` (
 
 LOCK TABLES `paciente` WRITE;
 /*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
-INSERT INTO `paciente` VALUES (7,'Daniel','Dominguez','Chavez','correo@correo.com','20/09/1993','','Masculino','',NULL,NULL,NULL,NULL,NULL,NULL,'2024-03-16 05:32:46',1),(8,'Olivia','Benson','Stabler','','16/01/1990','','Femenino','',NULL,NULL,NULL,NULL,NULL,NULL,'2024-03-16 23:13:54',1),(9,'Merit Itzia','Dominguez','Mendez','','01/01/2024','','Femenino','Parece estar muy ansioso',NULL,NULL,NULL,NULL,NULL,NULL,'2024-03-16 23:17:34',1),(10,'Oscar','Castillo','Soria','correo@correo.com','10/02/1992','','Masculino','Presenta Vitiligo','Poniente 15 425','Mexico','Mexico','Nezahualcoyotl','57820','No','2024-03-17 00:11:56',1),(11,'Genaro','Luna','Harfuch','','31/07/1944','','Masculino','','','','','','','','2024-03-18 01:15:19',1),(12,'Luz Elena','Mendez','Mauleon','','24/12/1997','','Femenino','','','','','','','','2024-03-18 01:32:10',1);
+INSERT INTO `paciente` VALUES (7,'Daniel','Dominguez','Chavez','correo@correo.com','20/09/1993','','Masculino','',NULL,NULL,NULL,NULL,NULL,NULL,'2024-03-16 05:32:46',1),(8,'Olivia','Benson','Stabler','','16/01/1990','','Femenino','',NULL,NULL,NULL,NULL,NULL,NULL,'2024-03-16 23:13:54',1),(9,'Merit Itzia','Dominguez','Mendez','','01/01/2024','','Femenino','Parece estar muy ansioso',NULL,NULL,NULL,NULL,NULL,NULL,'2024-03-16 23:17:34',1),(10,'Oscar','Castillo','Soria','correo@correo.com','10/02/1992','','Masculino','Presenta Vitiligo','Poniente 15 425','Mexico','Mexico','Nezahualcoyotl','57820','No','2024-03-17 00:11:56',1),(11,'Genaro','Luna','Harfuch','','31/07/1944','','Masculino','','','','','','','','2024-03-18 01:15:19',1),(12,'Luz Elena','Mendez','Mauleon','','24/12/1997','','Femenino','','','','','','','','2024-03-18 01:32:10',1),(13,'Pedro','Perez','Perez','','01/02/2024','','Masculino','Observaciones','','','','','','','2024-03-18 16:41:05',1),(14,'Eduardo','Juarez','Juarez','-','10/03/2024','','Masculino','asdfasdf',NULL,NULL,NULL,NULL,NULL,NULL,'2024-03-18 16:41:54',1);
 /*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -518,4 +587,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-18  0:27:56
+-- Dump completed on 2024-03-18 15:20:25
