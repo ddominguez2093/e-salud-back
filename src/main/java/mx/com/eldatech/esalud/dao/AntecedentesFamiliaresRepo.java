@@ -5,6 +5,7 @@
 package mx.com.eldatech.esalud.dao;
 
 import mx.com.eldatech.esalud.vo.AntecedentesFamiliaresVO;
+import mx.com.eldatech.esalud.vo.HistoriaClinicaVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -12,5 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author ddomi
  */
 public interface AntecedentesFamiliaresRepo extends JpaRepository<AntecedentesFamiliaresVO, Long> {
-    
+    AntecedentesFamiliaresVO findAntecedentesFamiliaresByIdHistoria(HistoriaClinicaVO historia);
 }

@@ -4,6 +4,7 @@
  */
 package mx.com.eldatech.esalud.dao;
 
+import mx.com.eldatech.esalud.dto.AntecedentesFamiliaresDTO;
 import mx.com.eldatech.esalud.vo.AntecedentesFamiliaresVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,7 @@ public class AntecedentesFamiliaresService {
         this.repository = repository;
     }
     
-    
+    public AntecedentesFamiliaresDTO insertAntecedentes(AntecedentesFamiliaresVO antecedentes) {
+        return new AntecedentesFamiliaresDTO(this.repository.save(antecedentes));
+    }
 }

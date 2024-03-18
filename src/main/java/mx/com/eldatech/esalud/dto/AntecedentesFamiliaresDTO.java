@@ -4,6 +4,8 @@
  */
 package mx.com.eldatech.esalud.dto;
 
+import mx.com.eldatech.esalud.vo.AntecedentesFamiliaresVO;
+
 /**
  *
  * @author ddomi
@@ -22,6 +24,23 @@ public class AntecedentesFamiliaresDTO {
     private String obsOtros;
     private Integer idAntecedente;
     private Integer idHistoria;
+    
+    public AntecedentesFamiliaresDTO(){}
+    
+    public AntecedentesFamiliaresDTO(AntecedentesFamiliaresVO antecedentesVO) {
+        this.diabetes = antecedentesVO.getDiabetes();
+        this.enfermedadesCorazon = antecedentesVO.getEnfermedadesCorazon();
+        this.hipertension = antecedentesVO.getHipertension();
+        this.cancer = antecedentesVO.getCancer();
+        this.otros = antecedentesVO.getOtros();
+        this.obsDiabetes = antecedentesVO.getObservacionesDiabetes();
+        this.obsCorazon = antecedentesVO.getObservacionesCancer();
+        this.obsHipertension = antecedentesVO.getObservacionesHipertencion();
+        this.obsCancer = antecedentesVO.getObservacionesCancer();
+        this.obsOtros = antecedentesVO.getObservacionesOtros();
+        this.idAntecedente = antecedentesVO.getIdAntecedentes();
+        this.idHistoria = antecedentesVO.getIdHistoria().getIdHistoria();
+    }
 
     public Boolean getDiabetes() {
         return diabetes;

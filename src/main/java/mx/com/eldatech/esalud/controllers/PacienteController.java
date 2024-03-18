@@ -8,10 +8,16 @@ import java.io.File;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import mx.com.eldatech.esalud.dao.AntecedentesFamiliaresService;
 import mx.com.eldatech.esalud.dao.ConsultasService;
+import mx.com.eldatech.esalud.dao.HistoriaClinicaService;
 import mx.com.eldatech.esalud.dao.PacienteService;
+import mx.com.eldatech.esalud.dto.AntecedentesFamiliaresDTO;
+import mx.com.eldatech.esalud.dto.HistoriaClinicaDTO;
 import mx.com.eldatech.esalud.dto.PacienteDTO;
+import mx.com.eldatech.esalud.vo.AntecedentesFamiliaresVO;
 import mx.com.eldatech.esalud.vo.ConsultasVO;
+import mx.com.eldatech.esalud.vo.HistoriaClinicaVO;
 import mx.com.eldatech.esalud.vo.PacienteVO;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
@@ -37,22 +43,28 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RestController
 @RequestMapping("/paciente-controller")
 public class PacienteController {
-
+    
     private static final Logger logger = LogManager.getLogger(PacienteController.class);
     
     @Autowired
     private PacienteService pacienteService;
-
+    
     @Autowired
     private ConsultasService consultaService;
-
+    
+    @Autowired
+    private HistoriaClinicaService historiaService;
+    
+    @Autowired
+    private AntecedentesFamiliaresService antecedentesService;
+    
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Error message")
     public void handleError(Exception ex) {
         logger.error("Ocurrio un error en PacienteController", ex);
         logger.error(ex.getLocalizedMessage());
     }
-
+    
     @PostMapping("/insertPatient")
     public ResponseEntity<Boolean> insertaPaciente(@RequestBody PacienteVO paciente) {
         paciente.setFechaRegistro(new Date(System.currentTimeMillis()));
@@ -63,7 +75,7 @@ public class PacienteController {
             return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    
     @GetMapping("/getAllPatients")
     public ResponseEntity<List<PacienteDTO>> getAllPatients() {
         List<PacienteVO> listaPacientes = this.pacienteService.getAllPatients();
@@ -73,7 +85,7 @@ public class PacienteController {
             return new ResponseEntity<>(PacienteDTO.getListDTOFromVO(listaPacientes), HttpStatus.OK);
         }
     }
-
+    
     @PostMapping("/updatePatient")
     public ResponseEntity<Boolean> updatePaciente(@RequestBody PacienteVO paciente) {
         PacienteVO pacienteUpdated = this.pacienteService.updatePaciente(paciente);
@@ -83,7 +95,7 @@ public class PacienteController {
             return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    
     @PostMapping("/deletePatient")
     public ResponseEntity<Boolean> deletePaciente(@RequestBody PacienteVO paciente) {
         List<ConsultasVO> listaConsultas = this.consultaService.getConsultasByIdPaciente(paciente);
@@ -95,7 +107,7 @@ public class PacienteController {
         this.pacienteService.deletePaciente(paciente);
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
-
+    
     @GetMapping("/getConsentimiento")
     public ResponseEntity<String> getConsentimiento() throws Exception {
         File file = new File("CONSENTIMIENTO.pdf");
@@ -104,5 +116,36 @@ public class PacienteController {
     }
     
     @PostMapping("/getHistoria")
-    public ResponseEntity<Boolean> getHistoria(@RequestParam)
+    public ResponseEntity<HistoriaClinicaDTO> getHistoria(@RequestParam(name = "idPaciente") Integer idPaciente) {
+        HistoriaClinicaVO historia = this.historiaService.findByIdPaciente(idPaciente);
+        if (historia != null) {
+            return new ResponseEntity<>(new HistoriaClinicaDTO(historia), HttpStatus.OK);
+        } else {
+            HistoriaClinicaVO historiaVO = new HistoriaClinicaVO();
+            historiaVO.setIdPaciente(new PacienteVO(idPaciente));
+            HistoriaClinicaVO historiaInsert = this.historiaService.insertHistoria(historiaVO);
+            return new ResponseEntity<>(new HistoriaClinicaDTO(historiaInsert), HttpStatus.OK);
+        }
+    }
+    
+    @PostMapping("/insertAntecedentes")
+    public ResponseEntity<AntecedentesFamiliaresDTO> insertAntecedentes(@RequestBody AntecedentesFamiliaresVO antecedentes) {
+        AntecedentesFamiliaresDTO antecedentesDTO = this.antecedentesService.insertAntecedentes(antecedentes);
+        if(antecedentesDTO != null) {
+            return new ResponseEntity<>(antecedentesDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @PostMapping("/getTodayPatients")
+    public ResponseEntity<List<PacienteDTO>> getTodayPatients(@RequestParam(name = "idMedico") Integer idMedico) {
+        List<PacienteDTO> listaPacientes = PacienteDTO.getListDTOFromVO(this.pacienteService.getTodayPatients(idMedico));
+        if(listaPacientes != null) {
+            return new ResponseEntity<>(listaPacientes, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+   
 }

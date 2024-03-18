@@ -4,6 +4,8 @@
  */
 package mx.com.eldatech.esalud.dto;
 
+import mx.com.eldatech.esalud.vo.HistoriaClinicaVO;
+
 /**
  *
  * @author ddomi
@@ -13,6 +15,13 @@ public class HistoriaClinicaDTO {
     private Integer idHistoriaClinica;
     private Integer idPaciente;
     private AntecedentesFamiliaresDTO antecedentes;
+    
+    public HistoriaClinicaDTO(){}
+    
+    public HistoriaClinicaDTO(HistoriaClinicaVO historiaVO) {
+        this.idHistoriaClinica = historiaVO.getIdHistoria();
+        this.idPaciente = historiaVO.getIdPaciente().getIdPaciente();        
+    }
 
     public Integer getIdHistoriaClinica() {
         return idHistoriaClinica;

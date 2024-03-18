@@ -36,6 +36,12 @@ public class PacienteService {
         }
     }
     
+    public List<PacienteVO> getTodayPatients(Integer idMedico) {
+        List<PacienteVO> listaPacientes = this.repository.findAllRegistradosHoyByIdMedico(idMedico);
+        fillFormattedDate(listaPacientes);
+        return listaPacientes;
+    }
+    
     public PacienteVO insertPaciente(PacienteVO paciente) {
         return this.repository.save(paciente);
     }
