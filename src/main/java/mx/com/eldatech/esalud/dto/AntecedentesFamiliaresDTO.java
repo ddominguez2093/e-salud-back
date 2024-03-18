@@ -17,11 +17,11 @@ public class AntecedentesFamiliaresDTO {
     private Boolean hipertension;
     private Boolean cancer;
     private Boolean otros;
-    private String obsDiabetes;
-    private String obsCorazon;
-    private String obsHipertension;
-    private String obsCancer;
-    private String obsOtros;
+    private String observacionesDiabetes;
+    private String observacionesCorazon;
+    private String observacionesHipertencion;
+    private String observacionesCancer;
+    private String observacionesOtros;
     private Integer idAntecedente;
     private Integer idHistoria;
     
@@ -33,11 +33,11 @@ public class AntecedentesFamiliaresDTO {
         this.hipertension = antecedentesVO.getHipertension();
         this.cancer = antecedentesVO.getCancer();
         this.otros = antecedentesVO.getOtros();
-        this.obsDiabetes = antecedentesVO.getObservacionesDiabetes();
-        this.obsCorazon = antecedentesVO.getObservacionesCancer();
-        this.obsHipertension = antecedentesVO.getObservacionesHipertencion();
-        this.obsCancer = antecedentesVO.getObservacionesCancer();
-        this.obsOtros = antecedentesVO.getObservacionesOtros();
+        this.observacionesDiabetes = antecedentesVO.getObservacionesDiabetes();
+        this.observacionesCorazon = antecedentesVO.getObservacionesCorazon();
+        this.observacionesHipertencion = antecedentesVO.getObservacionesHipertencion();
+        this.observacionesCancer = antecedentesVO.getObservacionesCancer();
+        this.observacionesOtros = antecedentesVO.getObservacionesOtros();
         this.idAntecedente = antecedentesVO.getIdAntecedentes();
         this.idHistoria = antecedentesVO.getIdHistoria().getIdHistoria();
     }
@@ -82,44 +82,44 @@ public class AntecedentesFamiliaresDTO {
         this.otros = otros;
     }
 
-    public String getObsDiabetes() {
-        return obsDiabetes;
+    public String getObservacionesDiabetes() {
+        return observacionesDiabetes;
     }
 
-    public void setObsDiabetes(String obsDiabetes) {
-        this.obsDiabetes = obsDiabetes;
+    public void setObservacionesDiabetes(String observacionesDiabetes) {
+        this.observacionesDiabetes = observacionesDiabetes;
     }
 
-    public String getObsCorazon() {
-        return obsCorazon;
+    public String getObservacionesCorazon() {
+        return observacionesCorazon;
     }
 
-    public void setObsCorazon(String obsCorazon) {
-        this.obsCorazon = obsCorazon;
+    public void setObservacionesCorazon(String observacionesCorazon) {
+        this.observacionesCorazon = observacionesCorazon;
     }
 
-    public String getObsHipertension() {
-        return obsHipertension;
+    public String getObservacionesHipertencion() {
+        return observacionesHipertencion;
     }
 
-    public void setObsHipertension(String obsHipertension) {
-        this.obsHipertension = obsHipertension;
+    public void setObservacionesHipertencion(String observacionesHipertencion) {
+        this.observacionesHipertencion = observacionesHipertencion;
     }
 
-    public String getObsCancer() {
-        return obsCancer;
+    public String getObservacionesCancer() {
+        return observacionesCancer;
     }
 
-    public void setObsCancer(String obsCancer) {
-        this.obsCancer = obsCancer;
+    public void setObservacionesCancer(String observacionesCancer) {
+        this.observacionesCancer = observacionesCancer;
     }
 
-    public String getObsOtros() {
-        return obsOtros;
+    public String getObservacionesOtros() {
+        return observacionesOtros;
     }
 
-    public void setObsOtros(String obsOtros) {
-        this.obsOtros = obsOtros;
+    public void setObservacionesOtros(String observacionesOtros) {
+        this.observacionesOtros = observacionesOtros;
     }
 
     public Integer getIdAntecedente() {
@@ -137,4 +137,5 @@ public class AntecedentesFamiliaresDTO {
     public void setIdHistoria(Integer idHistoria) {
         this.idHistoria = idHistoria;
     }
+
 }

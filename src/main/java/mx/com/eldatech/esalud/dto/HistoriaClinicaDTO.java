@@ -20,7 +20,14 @@ public class HistoriaClinicaDTO {
     
     public HistoriaClinicaDTO(HistoriaClinicaVO historiaVO) {
         this.idHistoriaClinica = historiaVO.getIdHistoria();
-        this.idPaciente = historiaVO.getIdPaciente().getIdPaciente();        
+        this.idPaciente = historiaVO.getIdPaciente().getIdPaciente();   
+        setAdditionalData(historiaVO);
+    }
+    
+    private void setAdditionalData(HistoriaClinicaVO historia) {
+        if(historia.getAntecedentesFamiliaresVOList() != null && !historia.getAntecedentesFamiliaresVOList().isEmpty()) {
+            this.antecedentes = new AntecedentesFamiliaresDTO(historia.getAntecedentesFamiliaresVOList().get(0));
+        }
     }
 
     public Integer getIdHistoriaClinica() {

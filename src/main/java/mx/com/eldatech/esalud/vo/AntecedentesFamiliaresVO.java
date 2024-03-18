@@ -48,8 +48,6 @@ public class AntecedentesFamiliaresVO implements Serializable {
     @Basic(optional = false)
     @Column(name = "otros")
     private boolean otros;
-    @Column(name = "observaciones")
-    private String observaciones;
     @JoinColumn(name = "id_historia", referencedColumnName = "id_historia")
     @ManyToOne(optional = false)
     private HistoriaClinicaVO idHistoria;
@@ -126,14 +124,6 @@ public class AntecedentesFamiliaresVO implements Serializable {
 
     public void setOtros(boolean otros) {
         this.otros = otros;
-    }
-
-    public String getObservaciones() {
-        return observaciones;
-    }
-
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
     }
 
     public HistoriaClinicaVO getIdHistoria() {
