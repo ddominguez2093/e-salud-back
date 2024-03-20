@@ -54,8 +54,8 @@ public class PacienteVO implements Serializable {
     @Column(name = "apellido_materno")
     private String apellidoMaterno;
     @Basic(optional = false)
-    @Column(name = "correo")
-    private String correo;
+    @Column(name = "alergias")
+    private String alergias;
     @Basic(optional = false)
     @Column(name = "fecha_nacimiento")
     private String fechaNacimiento;
@@ -99,12 +99,12 @@ public class PacienteVO implements Serializable {
         this.idPaciente = idPaciente;
     }
 
-    public PacienteVO(Integer idPaciente, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String fechaNacimiento, String genero, Date fechaRegistro) {
+    public PacienteVO(Integer idPaciente, String nombre, String apellidoPaterno, String apellidoMaterno, String alergias, String fechaNacimiento, String genero, Date fechaRegistro) {
         this.idPaciente = idPaciente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
-        this.correo = correo;
+        this.alergias = alergias;
         this.fechaNacimiento = fechaNacimiento;
         this.genero = genero;
         this.fechaRegistro = fechaRegistro;
@@ -142,12 +142,12 @@ public class PacienteVO implements Serializable {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getAlergias() {
+        return alergias;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setAlergias(String alergias) {
+        this.alergias = alergias;
     }
 
     public String getFechaNacimiento() {

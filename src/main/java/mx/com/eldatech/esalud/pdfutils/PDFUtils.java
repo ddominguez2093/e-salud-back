@@ -105,8 +105,8 @@ public class PDFUtils {
             String today = dtf.format(now);
             DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             //agregar nombre Medico
-            addTextBold(250, 740, nombreDoctor, contentStream);
-            addTextBold(250, 342, nombreDoctor, contentStream);
+            addTextBold(250, 755, nombreDoctor, contentStream);
+            addTextBold(250, 360, nombreDoctor, contentStream);
             //Especialidad                
             addTextBold(85, 330, "Especialidad: " + sessionData.getEspecialidad(), contentStream);
             addTextBold(85, 725, "Especialidad: " + sessionData.getEspecialidad(), contentStream);
@@ -114,11 +114,11 @@ public class PDFUtils {
             addTextBold(458, 330, "Cedula Profesional: " + sessionData.getCedulaProfesional(), contentStream);
             addTextBold(458, 725, "Cedula Profesional: " + sessionData.getCedulaProfesional(), contentStream);
             //Agregar folio
-            addText(535, 359, folio, contentStream);
-            addText(535, 752, folio, contentStream);
+            addText(530, 360, folio, contentStream);
+            addText(530, 754, folio, contentStream);
             // Agregar Fecha Actual a ambas hojas
-            addText(535, 344, today, contentStream);
-            addText(535, 737, today, contentStream);
+            addText(530, 340, today, contentStream);
+            addText(530, 737, today, contentStream);
             //nombre del paciente
             addText(81, 303, paciente.getNombre(), contentStream);
             addText(81, 697, paciente.getNombre(), contentStream);

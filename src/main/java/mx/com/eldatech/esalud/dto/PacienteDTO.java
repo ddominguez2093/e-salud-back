@@ -23,7 +23,7 @@ public class PacienteDTO {
     private String apellidoMaterno;
     private String genero;
     private String fechaNacimiento;
-    private String correo;
+    private String alergias;
     private String fotografia;
     private String observaciones;
     private String direccion;
@@ -44,7 +44,7 @@ public class PacienteDTO {
         this.apellidoMaterno = paciente.getApellidoMaterno();
         this.genero = paciente.getGenero();
         this.fechaNacimiento = paciente.getFechaNacimiento();
-        this.correo = paciente.getCorreo();
+        this.alergias = paciente.getAlergias();
         this.fotografia = paciente.getFotografia();
         this.observaciones = paciente.getObservaciones();
         this.direccion = paciente.getDireccion();
@@ -179,12 +179,12 @@ public class PacienteDTO {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getAlergias() {
+        return alergias;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setCorreo(String alergias) {
+        this.alergias = alergias;
     }
 
     public String getFotografia() {

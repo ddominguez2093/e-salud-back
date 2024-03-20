@@ -7,6 +7,7 @@ public class MedicamentosRecetadosReq {
     private List<MedicamentosRecetadosVO> medicamentos;
     private SessionData sessionData;
     private Integer id_consulta;
+    private List<String> indicacionesAdicionales;
 
     /**
      * @return the medicamentos
@@ -42,5 +43,13 @@ public class MedicamentosRecetadosReq {
 
     public void setSessionData(SessionData sessionData) {
         this.sessionData = sessionData;
+    }
+
+    public List<String> getIndicacionesAdicionales() {
+        return indicacionesAdicionales;
+    }
+
+    public void setIndicacionesAdicionales(List<String> indicacionesAdicionales) {
+        this.indicacionesAdicionales = indicacionesAdicionales;
     }
 }
