@@ -88,6 +88,8 @@ public class PacienteVO implements Serializable {
     private MedicosVO idMedico;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPaciente")
     private List<HistoriaClinicaVO> historiaClinicaVOList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPaciente")
+    private List<NotasEvolucionVO> notasEvulucionVOList;
     
     @Transient
     private String fechaRegistroFor;
@@ -286,6 +288,14 @@ public class PacienteVO implements Serializable {
 
     public void setHistoriaClinicaVOList(List<HistoriaClinicaVO> historiaClinicaVOList) {
         this.historiaClinicaVOList = historiaClinicaVOList;
+    }
+
+    public List<NotasEvolucionVO> getNotasEvulucionVOList() {
+        return notasEvulucionVOList;
+    }
+
+    public void setNotasEvulucionVOList(List<NotasEvolucionVO> notasEvulucionVOList) {
+        this.notasEvulucionVOList = notasEvulucionVOList;
     }
     
 }

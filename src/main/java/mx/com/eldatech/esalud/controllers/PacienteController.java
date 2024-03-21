@@ -9,27 +9,33 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import mx.com.eldatech.esalud.dao.AntecedentesFamiliaresService;
+import mx.com.eldatech.esalud.dao.AntecedentesGinecoobstetricosService;
 import mx.com.eldatech.esalud.dao.AntecedentesNoPatologicosService;
 import mx.com.eldatech.esalud.dao.AntecedentesPatologicosService;
 import mx.com.eldatech.esalud.dao.ConsultasService;
 import mx.com.eldatech.esalud.dao.EstudiosGabineteService;
 import mx.com.eldatech.esalud.dao.HistoriaClinicaService;
 import mx.com.eldatech.esalud.dao.InterrogatorioSistemasService;
+import mx.com.eldatech.esalud.dao.NotasEvolucionService;
 import mx.com.eldatech.esalud.dao.PacienteService;
 import mx.com.eldatech.esalud.dto.AntecedentesFamiliaresDTO;
+import mx.com.eldatech.esalud.dto.AntecedentesGinecoobstetricosDTO;
 import mx.com.eldatech.esalud.dto.AntecedentesNoPatologicosDTO;
 import mx.com.eldatech.esalud.dto.AntecedentesPatologicosDTO;
 import mx.com.eldatech.esalud.dto.EstudiosGabineteDTO;
 import mx.com.eldatech.esalud.dto.HistoriaClinicaDTO;
 import mx.com.eldatech.esalud.dto.InterrogatorioSistemasDTO;
+import mx.com.eldatech.esalud.dto.NotasEvolucionDTO;
 import mx.com.eldatech.esalud.dto.PacienteDTO;
 import mx.com.eldatech.esalud.vo.AntecedentesFamiliaresVO;
+import mx.com.eldatech.esalud.vo.AntecedentesGinecoobstetricosVO;
 import mx.com.eldatech.esalud.vo.AntecedentesNoPatologicosVO;
 import mx.com.eldatech.esalud.vo.AntecedentesPatologicosVO;
 import mx.com.eldatech.esalud.vo.ConsultasVO;
 import mx.com.eldatech.esalud.vo.EstudiosGabineteVO;
 import mx.com.eldatech.esalud.vo.HistoriaClinicaVO;
 import mx.com.eldatech.esalud.vo.InterrogatorioSistemasVO;
+import mx.com.eldatech.esalud.vo.NotasEvolucionVO;
 import mx.com.eldatech.esalud.vo.PacienteVO;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
@@ -81,6 +87,12 @@ public class PacienteController {
     
     @Autowired
     private EstudiosGabineteService estudiosGabineteService;
+    
+    @Autowired
+    private AntecedentesGinecoobstetricosService antecedentesGinecoService;
+    
+    @Autowired
+    private NotasEvolucionService notasService;
     
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Error message")
@@ -199,6 +211,37 @@ public class PacienteController {
             return new ResponseEntity<>(estudiosDTO, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @PostMapping("/insertAntecedentesGineco")
+    public ResponseEntity<AntecedentesGinecoobstetricosDTO> insertInterrogatorio(@RequestBody AntecedentesGinecoobstetricosVO antecedentes) {
+        AntecedentesGinecoobstetricosDTO estudiosDTO = this.antecedentesGinecoService.insertAntecedente(antecedentes);
+        if(estudiosDTO != null) {
+            return new ResponseEntity<>(estudiosDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @PostMapping("/insertNotaEvolucion")
+    public ResponseEntity<NotasEvolucionDTO> insertNotaEvolucion(@RequestBody NotasEvolucionVO notasEvolucion) {
+        notasEvolucion.setFechaRegistro(new Date(System.currentTimeMillis()));
+        NotasEvolucionDTO notaEvolucionDTO = this.notasService.insertNote(notasEvolucion);
+        if(notaEvolucionDTO != null) {
+            return new ResponseEntity<>(notaEvolucionDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @PostMapping("/getEvolutionNotes")
+    public ResponseEntity<List<NotasEvolucionDTO>> getEvolutionNotes(@RequestParam(name = "idPaciente") Integer idPaciente) {
+        List<NotasEvolucionDTO> listaNotasDTO = this.notasService.getNotesByIdPatient(idPaciente);
+        if(listaNotasDTO != null) {
+            return new ResponseEntity<>(listaNotasDTO,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     

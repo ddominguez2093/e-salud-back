@@ -54,6 +54,8 @@ public class MedicosVO implements Serializable {
     private String horario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMedico")
     private List<PacienteVO> pacienteVOList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMedico")
+    private List<NotasEvolucionVO> notasEvolicionVOList;
 
     public MedicosVO() {
     }
@@ -159,6 +161,14 @@ public class MedicosVO implements Serializable {
     @Override
     public String toString() {
         return "mx.com.eldatech.esalud.vo.MedicosVO[ idMedico=" + idMedico + " ]";
+    }
+
+    public List<NotasEvolucionVO> getNotasEvolicionVOList() {
+        return notasEvolicionVOList;
+    }
+
+    public void setNotasEvolicionVOList(List<NotasEvolucionVO> notasEvolicionVOList) {
+        this.notasEvolicionVOList = notasEvolicionVOList;
     }
     
 }

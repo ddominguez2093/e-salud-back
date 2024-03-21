@@ -19,7 +19,7 @@ public class HistoriaClinicaDTO {
     private AntecedentesNoPatologicosDTO antecedentesNoPat;
     private InterrogatorioSistemasDTO interrogatorio;
     private EstudiosGabineteDTO estudiosGabinete;
-    
+    private AntecedentesGinecoobstetricosDTO antecedentesGinecologicos;
     public HistoriaClinicaDTO(){}
     
     public HistoriaClinicaDTO(HistoriaClinicaVO historiaVO) {
@@ -47,6 +47,10 @@ public class HistoriaClinicaDTO {
         
         if(historia.getEstudiosGabineteVOList() != null && !historia.getEstudiosGabineteVOList().isEmpty()) {
             this.estudiosGabinete = new EstudiosGabineteDTO(historia.getEstudiosGabineteVOList().get(0));
+        }
+        
+        if(historia.getAntecedentesGinecoobstetricosVOList() != null && !historia.getAntecedentesGinecoobstetricosVOList().isEmpty()) {
+            this.antecedentesGinecologicos = new AntecedentesGinecoobstetricosDTO(historia.getAntecedentesGinecoobstetricosVOList().get(0));
         }
     }
 
@@ -104,5 +108,13 @@ public class HistoriaClinicaDTO {
 
     public void setEstudiosGabinete(EstudiosGabineteDTO estudiosGabinete) {
         this.estudiosGabinete = estudiosGabinete;
+    }
+
+    public AntecedentesGinecoobstetricosDTO getAntecedentesGinecologicos() {
+        return antecedentesGinecologicos;
+    }
+
+    public void setAntecedentesGinecologicos(AntecedentesGinecoobstetricosDTO antecedentesGinecologicos) {
+        this.antecedentesGinecologicos = antecedentesGinecologicos;
     }
 }

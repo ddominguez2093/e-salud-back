@@ -29,11 +29,7 @@ import java.util.List;
 @NamedQueries({
     @NamedQuery(name = "HistoriaClinicaVO.findAll", query = "SELECT h FROM HistoriaClinicaVO h")})
 public class HistoriaClinicaVO implements Serializable {
-
-    
-
-    
-
+      
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,7 +49,9 @@ public class HistoriaClinicaVO implements Serializable {
     private List<InterrogatorioSistemasVO> interrogatorioSistemasVOList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idHistoria")
     private List<EstudiosGabineteVO> estudiosGabineteVOList;
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idHistoria")
+    private List<AntecedentesGinecoobstetricosVO> antecedentesGinecoobstetricosVOList;
+    
     public HistoriaClinicaVO() {
     }
 
@@ -140,6 +138,14 @@ public class HistoriaClinicaVO implements Serializable {
 
     public void setEstudiosGabineteVOList(List<EstudiosGabineteVO> estudiosGabineteVOList) {
         this.estudiosGabineteVOList = estudiosGabineteVOList;
+    }
+
+    public List<AntecedentesGinecoobstetricosVO> getAntecedentesGinecoobstetricosVOList() {
+        return antecedentesGinecoobstetricosVOList;
+    }
+
+    public void setAntecedentesGinecoobstetricosVOList(List<AntecedentesGinecoobstetricosVO> antecedentesGinecoobstetricosVOList) {
+        this.antecedentesGinecoobstetricosVOList = antecedentesGinecoobstetricosVOList;
     }
     
 }
