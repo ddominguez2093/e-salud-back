@@ -76,9 +76,9 @@ public class PDFUtils {
             addTextWithOverflow(113, 200, sessionData.getNombreMedico().toUpperCase(), contentStream, new PDType1Font(Standard14Fonts.FontName.HELVETICA), 8, page.getMediaBox());
             String desktopFilePath = "";
             if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-                desktopFilePath = desktopMacPath + "consentimiento_" + paciente.getNombre() + ".pdf";
+                desktopFilePath = desktopMacPath + "consentimiento_" + paciente.getNombre() +"_"+System.currentTimeMillis() +".pdf";
             } else {
-                desktopFilePath = desktopPath + "consentimiento_" + paciente.getNombre() + ".pdf";
+                desktopFilePath = desktopPath + "consentimiento_" + paciente.getNombre() +"_"+System.currentTimeMillis() + ".pdf";
             }
             contentStream.close();
             documento.save(desktopFilePath.trim());
@@ -110,8 +110,16 @@ public class PDFUtils {
             addTextWithOverflow(250, 750, nombreDoctor, contentStream, new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 8, page.getMediaBox());
             addTextWithOverflow(250, 355, nombreDoctor, contentStream, new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 8, page.getMediaBox());
             //alma mater
-            addTextWithOverflow(225, 740, sessionData.getAlmaMater(), contentStream, new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 8, page.getMediaBox());
-            addTextWithOverflow(225, 345, sessionData.getAlmaMater(), contentStream, new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 8, page.getMediaBox());
+            if (sessionData.getAlmaMater().length() > 35 && sessionData.getAlmaMater().length() < 39) {
+                addTextWithOverflow(235, 740, sessionData.getAlmaMater(), contentStream, new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 8, page.getMediaBox());
+                addTextWithOverflow(235, 345, sessionData.getAlmaMater(), contentStream, new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 8, page.getMediaBox());
+            } else if(sessionData.getAlmaMater().length() > 39) {
+                addTextWithOverflow(230, 740, sessionData.getAlmaMater(), contentStream, new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 8, page.getMediaBox());
+                addTextWithOverflow(230, 345, sessionData.getAlmaMater(), contentStream, new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 8, page.getMediaBox());
+            } else {
+                addTextWithOverflow(248, 740, sessionData.getAlmaMater(), contentStream, new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 8, page.getMediaBox());
+                addTextWithOverflow(248, 345, sessionData.getAlmaMater(), contentStream, new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 8, page.getMediaBox());
+            }
             //Especialidad                
             addTextWithOverflow(85, 330, "Especialidad: " + sessionData.getEspecialidad(), contentStream, new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 8, page.getMediaBox());
             addTextWithOverflow(85, 725, "Especialidad: " + sessionData.getEspecialidad(), contentStream, new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 8, page.getMediaBox());
@@ -196,7 +204,7 @@ public class PDFUtils {
             if (System.getProperty("os.name").toLowerCase().contains("mac")) {
                 desktopFilePath = desktopMacPath + paciente.getNombre() + ".pdf";
             } else {
-                desktopFilePath = desktopPath + paciente.getNombre() + ".pdf";
+                desktopFilePath = desktopPath + paciente.getNombre() +"_"+System.currentTimeMillis() +".pdf";
             }
 
             contentStream.close();
@@ -295,7 +303,7 @@ public class PDFUtils {
         contentStream.newLineAtOffset(x, y);
         contentStream.showText(line.toString());
         contentStream.endText();
-       
+
     }
 
     private static String remove(String test) {
