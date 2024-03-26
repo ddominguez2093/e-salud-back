@@ -41,10 +41,10 @@ public class ConsultasVO implements Serializable {
     private Integer idConsulta;
     @Basic(optional = false)
     @Column(name = "peso")
-    private double peso;
+    private String peso;
     @Basic(optional = false)
     @Column(name = "talla")
-    private double talla;
+    private String talla;
     @Basic(optional = false)
     @Column(name = "alergias")
     private String alergias;
@@ -105,7 +105,7 @@ public class ConsultasVO implements Serializable {
         this.frecuenciaRespiratoria = signos.getFrecuenciaRespiratoria();
     }
 
-    public ConsultasVO(Integer idConsulta, double peso, double talla, String alergias, String diagnostico, String frecuenciaCardiaca, String fum, String glucosa, String saturacionOxigeno, String temperatura, String tensionArterial, String frecuenciaRespiratoria, Date fechaConsulta) {
+    public ConsultasVO(Integer idConsulta, String peso, String talla, String alergias, String diagnostico, String frecuenciaCardiaca, String fum, String glucosa, String saturacionOxigeno, String temperatura, String tensionArterial, String frecuenciaRespiratoria, Date fechaConsulta) {
         this.idConsulta = idConsulta;
         this.peso = peso;
         this.talla = talla;
@@ -129,19 +129,19 @@ public class ConsultasVO implements Serializable {
         this.idConsulta = idConsulta;
     }
 
-    public double getPeso() {
+    public String getPeso() {
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(String peso) {
         this.peso = peso;
     }
 
-    public double getTalla() {
+    public String getTalla() {
         return talla;
     }
 
-    public void setTalla(double talla) {
+    public void setTalla(String talla) {
         this.talla = talla;
     }
 

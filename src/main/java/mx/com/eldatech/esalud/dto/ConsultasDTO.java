@@ -16,8 +16,8 @@ import mx.com.eldatech.esalud.vo.ConsultasVO;
 public class ConsultasDTO {
 
     private Integer idConsulta;
-    private Double peso;
-    private Double talla;
+    private String peso;
+    private String talla;
     private String alergias;
     private String diagnostico;
     private String frecuenciaCardiaca;
@@ -74,28 +74,28 @@ public class ConsultasDTO {
     /**
      * @return the peso
      */
-    public Double getPeso() {
+    public String getPeso() {
         return peso;
     }
 
     /**
      * @param peso the peso to set
      */
-    public void setPeso(Double peso) {
+    public void setPeso(String peso) {
         this.peso = peso;
     }
 
     /**
      * @return the talla
      */
-    public Double getTalla() {
+    public String getTalla() {
         return talla;
     }
 
     /**
      * @param talla the talla to set
      */
-    public void setTalla(Double talla) {
+    public void setTalla(String talla) {
         this.talla = talla;
     }
 

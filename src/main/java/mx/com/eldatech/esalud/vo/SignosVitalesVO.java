@@ -10,8 +10,8 @@ package mx.com.eldatech.esalud.vo;
  */
 public class SignosVitalesVO {
 
-    private Double peso;
-    private Double talla;
+    private String peso;
+    private String talla;
     private String tensionArterial;
     private String frecuenciaCardiaca;
     private String saturacionOxigeno;
@@ -27,28 +27,28 @@ public class SignosVitalesVO {
     /**
      * @return the peso
      */
-    public Double getPeso() {
+    public String getPeso() {
         return peso;
     }
 
     /**
      * @param peso the peso to set
      */
-    public void setPeso(Double peso) {
+    public void setPeso(String peso) {
         this.peso = peso;
     }
 
     /**
      * @return the talla
      */
-    public Double getTalla() {
+    public String getTalla() {
         return talla;
     }
 
     /**
      * @param talla the talla to set
      */
-    public void setTalla(Double talla) {
+    public void setTalla(String talla) {
         this.talla = talla;
     }
 
