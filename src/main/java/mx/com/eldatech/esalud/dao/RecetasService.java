@@ -31,6 +31,10 @@ public class RecetasService {
     public List<RecetasVO> findByIdPatient(PacienteVO idPaciente) {
         return repository.findRecetasByIdPaciente(idPaciente);
     }
+
+    public RecetasVO getLast() {
+        return repository.findTopByOrderByFechaCreacionDesc();
+    }
     
     
 }

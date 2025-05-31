@@ -15,4 +15,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface RecetasRepo extends JpaRepository<RecetasVO, Long> {
     List<RecetasVO> findRecetasByIdPaciente(PacienteVO idPaciente);
+    RecetasVO findTopByOrderByFechaCreacionDesc();
 }

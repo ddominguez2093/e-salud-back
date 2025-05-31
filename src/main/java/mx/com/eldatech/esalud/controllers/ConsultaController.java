@@ -96,38 +96,41 @@ public class ConsultaController {
     public ResponseEntity<PDFResponse> generarReceta(@RequestBody MedicamentosRecetadosReq request) {
         PDFResponse responsePDF = new PDFResponse();
         ConsultasVO consulta = consultasService.getConsultaById(request.getId_consulta().longValue());
-        if (consulta != null) {
-            List<RecetasVO> listaRecetas = recetasService.getAll();
-            Integer pk = 1;
-            String folio = "";
-            if (listaRecetas.isEmpty()) {
-                folio = Utilities.generateFolio(pk);
-            } else {
-                RecetasVO receta = Utilities.getLastElementOfList(listaRecetas, "getFechaCreacion");
-                if (receta != null) {
-                    folio = Utilities.generateFolio(receta.getIdReceta());
-                } else {
-                    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-                }
-            }
-            RecetasVO receta = new RecetasVO();
-            receta.setIdConsulta(consulta);
-            receta.setIdPaciente(consulta.getIdPaciente());
-            receta.setReceta(folio);
-            receta.setFechaCreacion(new Date(System.currentTimeMillis()));
-            PDFUtils pdf = new PDFUtils();
-            String base64File = pdf.fillPrescriptionPDF(consulta.getIdPaciente(), consulta, request.getMedicamentos(), folio,request.getSessionData());
-            receta.setReceta(base64File);            
-            if (base64File != null && !base64File.isEmpty()) {
-                recetasService.addReceipt(receta);
-                responsePDF.setReceta(base64File);
-                responsePDF.setConcentimiento(pdf.fillConsenPDF(consulta.getIdPaciente(), consulta, request.getSessionData()));
-                return new ResponseEntity<>(responsePDF, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        if (consulta == null) {
+            return ResponseEntity.notFound().build();
         }
+
+        // Obtener última receta solo si existe
+        RecetasVO ultimaReceta = recetasService.getLast();
+        String folio = (ultimaReceta != null)
+                ? Utilities.generateFolio(ultimaReceta.getIdReceta())
+                : Utilities.generateFolio(1);
+
+        // Construir objeto receta
+        RecetasVO receta = new RecetasVO();
+        receta.setIdConsulta(consulta);
+        receta.setIdPaciente(consulta.getIdPaciente());
+        receta.setFechaCreacion(new Date());
+
+        PDFUtils pdf = new PDFUtils();
+        String base64File = pdf.fillPrescriptionPDF(
+                consulta.getIdPaciente(),
+                consulta,
+                request.getMedicamentos(),
+                folio,
+                request.getSessionData());
+
+        if (base64File == null || base64File.isEmpty()) {
+            return ResponseEntity.internalServerError().build();
+        }
+
+        receta.setReceta(base64File);
+        recetasService.addReceipt(receta);
+
+        responsePDF.setReceta(base64File);
+        responsePDF.setConcentimiento(pdf.fillConsenPDF(
+                consulta.getIdPaciente(), consulta, request.getSessionData()));
+
+        return ResponseEntity.ok(responsePDF);
     }
 }
